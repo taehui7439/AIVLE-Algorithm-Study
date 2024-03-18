@@ -1,5 +1,3 @@
-
-
 class Node {
 	constructor(data, next = null, prev = null) {
 		this.data = data;
@@ -7,7 +5,6 @@ class Node {
 		this.prev = prev;
 	}
 }
-
 class DLinkedList {
 	constructor() {
 		this.head = null;
@@ -27,6 +24,7 @@ class DLinkedList {
 			node.next = this.head;
 			this.tail.next = node;
 			this.head.prev = node;
+			this.tail = node;
 		}
 
 		this.size += 1;
@@ -48,6 +46,8 @@ class DLinkedList {
 			this.head = secNode;
 		}
 		this.size -= 1;
+
+		// console.log('node delete');
 	}
 
 	moveToLeft(n = 1) {
@@ -57,11 +57,13 @@ class DLinkedList {
 
 		while (n > 0) {
 			// 아니면, head가 tail이 되고 tail의 prev를 tail로 함
-			this.head = this.tail;
+			this.head = this.head.prev;
 			this.tail = this.tail.prev;
 
 			n -= 1;
 		}
+
+		// console.log('move left');
 	}
 
 	moveToRight(n = 1) {
@@ -71,11 +73,13 @@ class DLinkedList {
 
 		while (n > 0) {
 			// 아니면, tail이 head가 되고 head의 next를 head로 함
-			this.tail = this.head;
 			this.head = this.head.next;
+			this.tail = this.tail.next;
 
 			n -= 1;
 		}
+
+		// console.log('move left');
 	}
 
 	findMinimumCnt(data) {
@@ -84,11 +88,12 @@ class DLinkedList {
 		if (this.size <= 1) return 0;
 
 		// 아니면 좌, 우로 움직이는 횟수 count
-		let leftCnt = rightCnt = 0;
+		let leftCnt = 0;
+		let rightCnt = 0;
 		let node = this.head;
 
 		// 현재 노드의 데이터가 찾는 데이터가 아니라면 다음으로 넘어감
-		// 죄, 우를 계산하여 더 짧은 방향으로 움직이고 
+		// 죄, 우를 계산하여 더 짧은 방향으로 움직임
 		while (node.data !== data) {
 			node = node.next;
 			rightCnt += 1;
@@ -101,21 +106,31 @@ class DLinkedList {
 			leftCnt += 1;
 		}
 
+		// console.log(`leftcnt: ${leftCnt}, rightcnt: ${rightCnt}`);
+
 		if (leftCnt < rightCnt) {
-			this.moveToRight(rightCnt);
-			this.delete();
-			return rightCnt;
-		} else {
 			this.moveToLeft(leftCnt);
 			this.delete();
 			return leftCnt;
+		} else {
+			this.moveToRight(rightCnt);
+			this.delete();
+			return rightCnt;
 		}
 	}
 }
 
+const [n, m, ...arr] = require("fs").readFileSync("/dev/stdin").toString().trim().split(/\s/).map(v => +v);
+
 ll = new DLinkedList();
 
-for (let i = 1; i <= n; i++) {
-	ll.insert(i);
-}
-console.log()
+// let n = 10;
+// let m = 3;
+// let arr = [2, 9, 5];
+
+for (let i = 1; i <= n; i++) ll.insert(i);
+
+console.log(arr.reduce((acc, r) => acc + ll.findMinimumCnt(r), 0))
+
+
+// --------------------------------------------------------------------------
