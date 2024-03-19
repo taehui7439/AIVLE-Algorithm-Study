@@ -134,3 +134,20 @@ console.log(arr.reduce((acc, r) => acc + ll.findMinimumCnt(r), 0))
 
 
 // --------------------------------------------------------------------------
+// 다른 풀이법
+
+const input = require("fs").readFileSync("/dev/stdin").toString().trim().split('\n');
+
+const inp1 = input[0].split(' ');
+const inp2 = input[1].split(' ');
+
+const n_int = Number(inp1[0]);
+const m_int = Number(inp1[0]);
+
+let que = [];
+
+for (let i = 1; i <= n; i++) {
+	que.push(i)
+}
+
+let cnt = 0;
