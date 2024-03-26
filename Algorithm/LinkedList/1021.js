@@ -136,6 +136,8 @@ console.log(arr.reduce((acc, r) => acc + ll.findMinimumCnt(r), 0))
 // --------------------------------------------------------------------------
 // 다른 풀이법
 
+// 다시 풀 필요 있음
+
 const input = require("fs").readFileSync("/dev/stdin").toString().trim().split('\n');
 
 const inp1 = input[0].split(' ');
