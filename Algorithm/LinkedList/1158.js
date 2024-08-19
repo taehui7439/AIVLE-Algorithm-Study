@@ -1,10 +1,9 @@
 const fs = require('fs');
-const readFileSyncAddress = process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
+const readFileSyncAddress = "AIVLE-Algorithm-Study/Algorithm/read.txt"
+// '/dev/stdin'
 const input = fs.readFileSync(readFileSyncAddress).toString().trim();
 
-
 const [n, cnt] = input.split(' ').map(v => +v);
-
 let ans = [];
 let idx = 0;
 

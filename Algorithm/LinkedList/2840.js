@@ -12,13 +12,13 @@ function wheel(n, k, comm) {
 
 		// 이미 들어있는데, 같은 문자가 아닐 경우,
 		// 없지만, 다른 곳에 있는 문자일 경우에 ! 출력
-		if ((deque[0] !== '?' && deque[0] != dt) || (deque[0] === '?' && alpha[dt.charCodeAt(0)] === '1')) {
+		if ((deque[0] !== '?' && deque[0] != dt) || (deque[0] === '?' && alpha[dt.charCodeAt(0) - 'A'.charCodeAt(0)] === '1')) {
 			return "!"
 		}
 		else {
 			deque.shift();
 			deque.unshift(dt);
-			alpha[dt.charCodeAt(0)] = 1;
+			alpha[dt.charCodeAt(0) - 'A'.charCodeAt(0)] = 1;
 		}
 	}
 
@@ -29,14 +29,14 @@ function wheel(n, k, comm) {
 }
 
 // 백준 입력
-// const fs = require('fs');
-// const readFileSyncAddress = process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
-// const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
-
-// 로컬 입력
 const fs = require('fs');
-const readFileSyncAddress = 'AIVLE-Algorithm-Study/Algorithm/LinkedList/read.txt';
+const readFileSyncAddress = process.platform === 'linux' ? '/dev/stdin' : '/input.txt';
 const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
+// __dirname + 
+// 로컬 입력
+// const fs = require('fs');
+// const readFileSyncAddress = 'AIVLE-Algorithm-Study/Algorithm/LinkedList/read.txt';
+// const input = fs.readFileSync(readFileSyncAddress).toString().trim().split('\n');
 
 const [n, k] = input[0].split(' ').map(Number);
 const ans = [];

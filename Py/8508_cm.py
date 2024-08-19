@@ -57,4 +57,23 @@ for i in range(n):
 
 print(" ".join(map(str, rank)))
 
+# ------------------------------------
 
+n = 5
+scores = [[68, 73], [56, 64], [71, 56], [15, 23], [18, 22]]
+rank = [1] * n 
+
+for i in range(n - 1):
+	print(rank)
+	for j in range(i + 1, n):
+		if ((scores[i][0] > scores[j][0] and scores[i][1] >= scores[j][1]) or 
+			(scores[i][0] >= scores[j][0] and scores[i][1] > scores[j][1])): rank[j] += 1
+
+		elif ((scores[i][0] < scores[j][0] and scores[i][1] > scores[j][1]) or 
+			(scores[i][0] > scores[j][0] and scores[i][1] < scores[j][1])
+			(scores[i][0] == scores[j][0] and scores[i][1] == scores[j][1])):
+			if rank[i] > rank[j]:
+				rank[i] = rank[j]
+			elif rank[i] < rank[j]:
+				rank[j] = rank[i] 
+			else: continue
